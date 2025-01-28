@@ -6,7 +6,7 @@ import {
 import { MemoryDB as Database } from "@builderbot/bot";
 import { BaileysProvider as Provider } from "@builderbot/provider-baileys";
 
-const PORT = process.env.PORT ?? 3008;
+const PORT = process.env.PORT ?? 3000;
 
 
 const convertirRuta = (ruta) => {
@@ -34,9 +34,9 @@ const main = async () => {
     "/data",
     handleCtx(async (bot, req, res) => {
       const data = req.body;
-      console.log(data);
+      //'120363376889510859@g.us'
       const ruta = convertirRuta(data.voucher)
-      await bot.sendMessage('51980591729',[
+      const result = await bot.provider.sendMedia(data.grupoJid,ruta,[
         `Nombre: *${data.nombre} ${data.apellido}*`,
         `DNI: ${data.dni}`,
         `Cel: ${data.celular}`,
@@ -50,9 +50,7 @@ const main = async () => {
         `PAGO COMPLETO PAGADO✅: ${data.fecha_pago}`,
         '',
         `ASESOR: ${data.asesor}`
-      ].join("\n"),{
-        media: ruta
-      });
+      ].join("\n"))
       res.writeHead(200, { 'Content-Type': 'application/json' })
       return res.end(JSON.stringify({ status: true}));
     })
