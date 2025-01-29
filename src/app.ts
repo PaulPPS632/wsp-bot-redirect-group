@@ -33,7 +33,7 @@ const main = async () => {
   adapterProvider.server.post(
     "/data",
     handleCtx(async (bot, req, res) => {
-      const data = req.body;
+      const data = req.query;
       //'120363376889510859@g.us'
       const ruta = convertirRuta(data.voucher)
       const result = await bot.provider.sendMedia(data.grupoJid,ruta,[
@@ -51,6 +51,16 @@ const main = async () => {
         '',
         `ASESOR: ${data.asesor}`
       ].join("\n"))
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      return res.end(JSON.stringify({ status: true}));
+    })
+  );
+  adapterProvider.server.post(
+    "/prueba",
+    handleCtx(async (bot, req, res) => {
+      const data = req.body;
+      console.log(data);
+      console.log(req.query)
       res.writeHead(200, { 'Content-Type': 'application/json' })
       return res.end(JSON.stringify({ status: true}));
     })
