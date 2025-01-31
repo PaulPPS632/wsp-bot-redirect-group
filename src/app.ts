@@ -37,7 +37,7 @@ const convertirRuta = (ruta) => {
 const main = async () => {
   const adapterFlow = createFlow([]);
 
-  const adapterProvider = createProvider(Provider, { usePairingCode: true, phoneNumber:"51948701436"})
+  const adapterProvider = createProvider(Provider, { usePairingCode: true, phoneNumber:"51914355258"})
   const adapterDB = new Database();
 
   const { handleCtx, httpServer } = await createBot({
